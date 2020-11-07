@@ -1,11 +1,16 @@
 using UnityEngine;
-using System.Collections;
-using System.Collections.Generic;
 
 public class PlayerMovement : MonoBehaviour
 {
 
-    public float playerMovementSpeed = 5.0f;
+    private float playerMovementSpeed = 15.0f;
+    private Rigidbody2D playerRigidBody;
+    private float jumpForce = 40.0f;
+
+    private void Awake()
+    {
+        playerRigidBody = GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody2D>();
+    }
 
     private void Update()
     {
@@ -24,7 +29,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.UpArrow))
         {
-
+            playerRigidBody.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
         }
     }
 }
